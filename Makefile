@@ -14,6 +14,10 @@ ACCESS_TOKEN := $(shell gcloud auth print-access-token)
 VERSION_NAME=v5
 
 
+echo:
+	echo $(IMAGE_TAG)
+
+
 gc_vm:
 	# gcloud compute instances delete $(REPOSITORY) --zone $(REGION)-c
 	# gcloud compute instances create-with-container $(REPOSITORY) \
@@ -75,11 +79,5 @@ gc_health:
 		-d "file_path=gs://tuto1/short_video.mp4" \
 		https://$(REGION)-ml.googleapis.com/v1/projects/$(PROJECT_ID)/models/$(MODEL_NAME)/versions/$(VERSION_NAME):predict
 
-gc_sth:
-	gcloud beta ai-platform models remove-iam-policy-binding \
-            $(MODEL_NAME) --member='user:tomoya-koike@g.ecc.u-tokyo.ac.jp' \
-            --role='roles/ml.modelOwner' --region $(REGION)
-
-gc_ssh:
-	# ssh makeffort134@34.84.195.208
-	gcloud beta compute ssh --zone $(REGION)-c $(REPOSITORY) --project $(PROJECT_ID)
+gc_crun:
+	gcloud builds submit --config $(CONFIG_FILE_PATH) $(SOURCE_DIRECTORY)

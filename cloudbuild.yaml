@@ -1,9 +1,15 @@
+steps:
+
 # download gcloud json file
 
 # pytest
+- name: 'docker.io/library/python:3.7'
+  entrypoint: /bin/sh
+  args: [-c, 'pip install pytest;pytest']
 
-# build from Dockerfile
-
-# push image
+# build from Dockerfile and push image
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/sonorous-cacao-310307/app_nginx_uwsgi', '.' ]
+images: ['gcr.io/sonorous-cacao-310307/app_nginx_uwsgi']
 
 # update ai-platform version
