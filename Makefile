@@ -36,8 +36,8 @@ to_gcs:
 	gsutil cp app.zip gs://$(SOURCE_BUCKET)/
 
 build:
-	docker build -t $(NAME) .
-	# docker build -f Dockerfile -t $(NAME) .
+	docker build -t $(NAME) ./app
+	# docker build -f Dockerfile -t $(NAME) ./app
 
 run:
 	docker stop $(LOCAL_NAME)
