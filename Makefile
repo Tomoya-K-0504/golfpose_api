@@ -79,5 +79,5 @@ gc_health:
 		-d "file_path=gs://tuto1/short_video.mp4" \
 		https://$(REGION)-ml.googleapis.com/v1/projects/$(PROJECT_ID)/models/$(MODEL_NAME)/versions/$(VERSION_NAME):predict
 
-gc_crun:
-	gcloud builds submit --config $(CONFIG_FILE_PATH) $(SOURCE_DIRECTORY)
+gc_cbuild:
+	gcloud builds submit --config cloudbuild.yaml ./app
