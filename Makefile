@@ -42,8 +42,11 @@ build:
 run:
 	docker stop $(LOCAL_NAME)
 	docker rm $(LOCAL_NAME)
-	docker run -d -p 80:80 --name=$(LOCAL_NAME) $(NAME)
+	docker run -d -p 80:80 --gpus 1 --name=$(LOCAL_NAME) $(NAME)
 	# docker run -d --name=$(LOCAL_NAME) --net=host $(NAME)
+
+exec:
+	docker exec -it gpu /bin/bash
 
 attach:
 	docker attach $(LOCAL_NAME) --sig-proxy=false
