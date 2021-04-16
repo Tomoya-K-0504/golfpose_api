@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04
 
 RUN apt update && \
     apt install -y gcc && \
@@ -9,6 +9,7 @@ COPY ./app/ /app
 
 RUN pip3 install -r /app/app/requirements.txt
 
+MKDIR /var/log/nginx
 COPY install-nginx-debian.sh /
 
 RUN bash /install-nginx-debian.sh
