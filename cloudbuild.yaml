@@ -1,12 +1,12 @@
 steps:
 
   # Install dependencies
-  - name: python:3.7
+  - name: python:3.6
     entrypoint: pip
     args: ["install", "-r", "app/requirements.txt", "--user"]
 
   # Run unit tests
-  - name: python
+  - name: python:3.6
     entrypoint: python
     args: ["-m", "pytest", "--junitxml=${SHORT_SHA}_test_log.xml"]
 
