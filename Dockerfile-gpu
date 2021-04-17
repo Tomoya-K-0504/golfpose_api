@@ -3,16 +3,16 @@ FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu16.04
 RUN apt update && \
     apt install -y gcc && \
     apt install -y python3.7 python3-pip python3-setuptools && \
-    apt install -y libsm6 libxext6 libxrender-dev # For opencv
+    apt install -y libsm6 libxext6 libxrender-dev && \ # For opencv 
+    apt install -y nginx vim
 
 COPY ./app/ /app
 
 RUN pip3 install -r /app/app/requirements.txt
 
-MKDIR /var/log/nginx
-COPY install-nginx-debian.sh /
+# COPY install-nginx-debian.sh /
 
-RUN bash /install-nginx-debian.sh
+# RUN bash /install-nginx-debian.sh
 
 EXPOSE 80
 
@@ -58,9 +58,9 @@ RUN chmod +x /start.sh
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-WORKDIR /app
+WORKDIR /app/app
 
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/app/app
 
 ENTRYPOINT ["/entrypoint.sh"]
 
